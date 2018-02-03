@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('accueil', function () {
     return view('user.home');
-});
+})->name('accueil');
 
 Route::get('reservation', function () {
     return view('user.reservation');
