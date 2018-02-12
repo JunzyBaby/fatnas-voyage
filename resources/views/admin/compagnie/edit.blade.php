@@ -8,12 +8,16 @@
 	<link rel="icon" href="../../../../favicon.ico">
 	
 	<title>FATNAS-VOYAGE Administrateur</title>
+
+	<!--<link href="{{asset('css/style.default.css')}}" rel="stylesheet">-->
 	
 	<!-- Bootstrap core CSS -->
 	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 	
 	<!-- Custom styles for this template -->
 	<link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+
+
 	</head>
 	
 	<body>
@@ -25,23 +29,23 @@
 	
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
+			<li class="nav-item ">
+				<a class="nav-link" href="{{route('admin_path')}}">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
+			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Billets</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Clients</a>
-			</li>
-			<li class="nav-item">
 				<a class="nav-link" href="{{route('compagnies.index')}}">Compagnies</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Réservations</a>
+				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Vols</a>
+				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
 			</li>
 		</ul>	
 	</div>
@@ -71,43 +75,37 @@
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 		<h1>Tableau de Bord</h1>
 		
-			<div class="row">
-			    <div class="col-sm-2">
-			    	<a href="">
-					<img src="{{asset('images/billet.jpg')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-					<a href="" class="" >Espace des Billets</a>
-			    </div>
-
-			    <div class="col-sm-2">
-			    	<a href="">
-					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-				<a href="" class="">Espaces des Clients</a>
-			    </div>
-
-			    <div class="col-sm-2">
-			    	<a href="{{route('compagnies.index')}}">
-					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-				<a href="{{route('compagnies.index')}}" class="">Espace des compagnie</a>
-			    </div>
-
-			    <div class="col-sm-2">			    	
-					<a href="">
-					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-				<a href="" class="">Espace des reservations</a>			
-			    </div>
-
-			    <div class="col-sm-2">			    	
-					<a href="">
-					<img src="{{asset('images/avion.png')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-				<a href="" class="">Espace des vols</a>			
-			    </div> 
-
-		 	 </div>
+			<form id="basicForm" action="{{route('compagnies.update',$compagnie)}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+				{{csrf_field()}}
+				{{method_field('PUT')}}
+				<div class="form-group">
+		            <label class="col-sm-3 control-label"></label>
+		            <div class="col-sm-6">
+		               <input type="text" value="{{old('code')?? $compagnie->CodeCompagnie}}" name="code" placeholder="Code Compagnie" required="required" class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('code','<div  class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"></label>
+		            <div class="col-sm-6">
+		               <input type="text" value="{{ old('nom')??$compagnie->NomCompagnie}}" name="nom" placeholder="Nom de la compagnie" required="required" class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('nom','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"></label>
+		            <div class="col-sm-6">
+		               <input type="file" name="logo"  class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('logo','<div class="alert alert-danger">:message</div>') !!}
+            	<button type="submit" class="btn btn-primary">AJOUTER</button>
+            	
+			</form>
+			<br><button type="submit" class="btn btn-danger"><a href="{{route('compagnies.index')}}">ANNULER</a></button>
+			
+		 	
+		
 			
 		
 	

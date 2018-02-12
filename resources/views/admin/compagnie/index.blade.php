@@ -25,23 +25,23 @@
 	
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
+			<li class="nav-item ">
+				<a class="nav-link" href="{{route('admin_path')}}">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
+			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Billets</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Clients</a>
-			</li>
-			<li class="nav-item">
 				<a class="nav-link" href="{{route('compagnies.index')}}">Compagnies</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Réservations</a>
+				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Vols</a>
+				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
 			</li>
 		</ul>	
 	</div>
@@ -70,44 +70,53 @@
 	
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 		<h1>Tableau de Bord</h1>
-		
+		@if(session()->has('compagnie'))
+			<div class="alert alert-success">
+				{{session()->get('compagnie')}}
+			</div>
+		@endif
+		@if(session()->has('compagnieSuccess'))
+			<div class="alert alert-info">
+				{{session()->get('compagnieSuccess')}}
+			</div>
+		@endif
 			<div class="row">
-			    <div class="col-sm-2">
-			    	<a href="">
-					<img src="{{asset('images/billet.jpg')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-					<a href="" class="" >Espace des Billets</a>
-			    </div>
-
-			    <div class="col-sm-2">
-			    	<a href="">
-					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-				<a href="" class="">Espaces des Clients</a>
-			    </div>
-
-			    <div class="col-sm-2">
-			    	<a href="{{route('compagnies.index')}}">
-					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-				<a href="{{route('compagnies.index')}}" class="">Espace des compagnie</a>
-			    </div>
-
-			    <div class="col-sm-2">			    	
-					<a href="">
-					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-				<a href="" class="">Espace des reservations</a>			
-			    </div>
-
-			    <div class="col-sm-2">			    	
-					<a href="">
-					<img src="{{asset('images/avion.png')}}" class="img-thumbnail" alt="" width="200" height="230">
-					</a><br>
-				<a href="" class="">Espace des vols</a>			
-			    </div> 
-
-		 	 </div>
+				<div class="table-responsive">
+							    
+                <table class="table table-primary mb30">
+                    <thead>
+                      <tr>
+                        <th>N°</th>
+                        <th>Code de la compagnie</th>
+                        <th>Nom de la compagnie</th>
+                        <th>Logo de la compagnie</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($compagnies as $compagnie)                  
+                    <tr>	
+                        <td>{{$compagnie->IdCompagnie}}</td>
+                        <td>{{$compagnie->CodeCompagnie}}</td>
+                        <td>{{$compagnie->NomCompagnie}}</td>
+                        <td><img src="{{asset('storage/'.$compagnie->logo)}}"></td>
+                        <td><a class="btn btn-success" href="{{route('compagnies.edit',$compagnie)}}">Modifier</a></td>
+                        <td>
+                        	<form action="{{route('compagnies.destroy',$compagnie)}}" method="POST" >
+                        		{{csrf_field()}}
+                        		{{method_field('DELETE')}}
+                        		<input type="submit" value="Supprimer" name="Supprimer" class="btn btn-danger">
+                        	</form>
+                    	</td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+               </div>
+			    
+				<a class="btn btn-info" href="{{route('compagnies.create')}}"> Ajouter Compagnie</a>
+		 	</div>
 			
 		
 	
