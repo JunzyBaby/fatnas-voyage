@@ -34,7 +34,7 @@ class Reservation extends Model
     /**
      * @var array
      */
-    protected $fillable = ['DateReservation', 'NbrPlace', 'updated_at', 'created_at', 'IdClient', 'IdVol'];
+    protected $fillable = ['DateReservation', 'NbrPlace','statut', 'updated_at', 'created_at', 'IdClient', 'IdVol'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

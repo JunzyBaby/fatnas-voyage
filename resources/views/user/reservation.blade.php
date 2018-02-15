@@ -18,97 +18,31 @@
 		</div>
 	</div>
 	<div class="row">
+		<span class="card-panel red center offset-l6">Hello</span>
+	</div>
+	<div class="row">
 		<table class="z-depth-2 centered responsive-table">
+			
 			<tbody>
+				@foreach($vols as $vol)
 				<tr class="">
-					<td><img src="images/aire.png" alt="Air France" class="responsive-img"></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">Paris</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">22 / 02 / 2018</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">aller / retour</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">350 000 FCFA</a></td>
-					<td><a href="" class="btn waves-effect btn-large white lighten-4 black-text">50 places restantes</a></td>
-					<td><a href="index.php?page=register"  class="btn waves-effect btn-large blue darken-2  lighten-4 black-text" target="_blank">Reserver</a></td>
+					<td><img src="{{asset('storage/'.$vol->logo)}}" alt="" class="responsive-img"></td>
+					<td><a class="btn waves-effect btn-large white lighten-4 black-text">{{$vol->Destination}}</a></td>
+					<td><a class="btn waves-effect btn-large white lighten-4 black-text">{{$vol->DateDepart}}</a></td>
+					<td><a class="btn waves-effect btn-large white lighten-4 black-text">{{$vol->Statut}}</a></td>
+					<td><a class="btn waves-effect btn-large white lighten-4 black-text">{{$vol->prix}} FCFA</a></td>
+					<td><a href="" class="btn waves-effect btn-large white lighten-4 black-text">{{$vol->NbrePlace}} places restantes</a></td>
+					<td>
+						<form method="get" action="{{route('reservations.show',$vol->IdVol)}}">
+							{{csrf_field()}}
+							<input type="hidden" name="vol" value="{{$vol->IdVol}}">
+							<input type="submit" class="btn waves-effect btn-large blue darken-2  lighten-4 black-text" name="valider"  value="RESERVATION" >
+						</form>
+					</td>
 				</tr>
+				@endforeach
 			</tbody>
-		</table>
-		<table class="z-depth-2 centered responsive-table">
-			<tbody>
-				<tr class="">
-					<td><img src="images/France.png" alt="Air France" class="responsive-img"></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">Paris</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">22 / 02 / 2018</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">aller / retour</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">350 000 FCFA</a></td>
-					<td><a href="" class="btn waves-effect btn-large white lighten-4 black-text">50 places restantes</a></td>
-					<td><a href="index.php?page=register"  class="btn waves-effect btn-large blue darken-2  lighten-4 black-text" target="_blank">Reserver</a></td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="z-depth-2 centered responsive-table">
-			<tbody>
-				<tr class="">
-					<td><img src="images/Brussels.png" alt="Air France" class="responsive-img"></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">Paris</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">22 / 02 / 2018</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">aller / retour</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">350 000 FCFA</a></td>
-					<td><a href="" class="btn waves-effect btn-large white lighten-4 black-text">50 places restantes</a></td>
-					<td><a href="index.php?page=register"  class="btn waves-effect btn-large blue darken-2  lighten-4 black-text" target="_blank">Reserver</a></td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="z-depth-2 centered responsive-table">
-			<tbody>
-				<tr class="">
-					<td><img src="images/tap.png" alt="Air France" class="responsive-img"></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">Paris</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">22 / 02 / 2018</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">aller / retour</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">350 000 FCFA</a></td>
-					<td><a href="" class="btn waves-effect btn-large white lighten-4 black-text">50 places restantes</a></td>
-					<td><a href="index.php?page=register"  class="btn waves-effect btn-large blue darken-2  lighten-4 black-text" target="_blank">Reserver</a></td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="z-depth-2 centered responsive-table">
-			<tbody>
-				<tr class="">
-					<td><img src="images/tu.png" alt="Air France" class="responsive-img"></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">Paris</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">22 / 02 / 2018</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">aller / retour</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">350 000 FCFA</a></td>
-					<td><a href="" class="btn waves-effect btn-large white lighten-4 black-text">50 places restantes</a></td>
-					<td><a href="index.php?page=register"  class="btn waves-effect btn-large blue darken-2  lighten-4 black-text" target="_blank">Reserver</a></td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="z-depth-2 centered responsive-table">
-			<tbody>
-				<tr class="">
-					<td><img src="images/France.png" alt="Air France" class="responsive-img"></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">Paris</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">22 / 02 / 2018</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">aller / retour</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">350 000 FCFA</a></td>
-					<td><a href="" class="btn waves-effect btn-large white lighten-4 black-text">50 places restantes</a></td>
-					<td><a href="index.php?page=register"  class="btn waves-effect btn-large blue darken-2  lighten-4 black-text" target="_blank">Reserver</a></td>
-				</tr>
-			</tbody>
-		</table>
-		<table class="z-depth-2 centered responsive-table">
-			<tbody>
-				<tr class="">
-					<td><img src="images/aire.png" alt="Air France" class="responsive-img"></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">Paris</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">22 / 02 / 2018</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">aller / retour</a></td>
-					<td><a class="btn waves-effect btn-large white lighten-4 black-text">350 000 FCFA</a></td>
-					<td><a href="" class="btn waves-effect btn-large white lighten-4 black-text">50 places restantes</a></td>
-					<td><a href="index.php?page=register"  class="btn waves-effect btn-large blue darken-2  lighten-4 black-text" target="_blank">Reserver</a></td>
-				</tr>
-			</tbody>
-		</table>
+		</table>		
 	</div>
 </div>
 

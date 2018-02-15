@@ -28,7 +28,7 @@
 			<li class="nav-item ">
 				<a class="nav-link" href="{{route('admin_path')}}">Home <span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item active">
 				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
 			</li>
 			<li class="nav-item">
@@ -40,7 +40,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
 			</li>
-			<li class="nav-item active">
+			<li class="nav-item">
 				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
 			</li>
 		</ul>	
@@ -75,9 +75,9 @@
 				{{session()->get('compagnie')}}
 			</div>
 		@endif
-		@if(session()->has('volSuccess'))
+		@if(session()->has('compagnieSuccess'))
 			<div class="alert alert-info">
-				{{session()->get('VolSuccess')}}
+				{{session()->get('billetSuccess')}}
 			</div>
 		@endif
 			<div class="row">
@@ -86,26 +86,24 @@
                 <table class="table table-primary mb30">
                     <thead>
                       <tr>
-                        <th>N° du Vol</th>
-                        <th>Code du vol </th>
-                        <th>Nom de la compagnie</th>
-                        <th>Date de Depart</th>
-                        <th>Date d'arrivée</th>
-                        <th></th>
-                        <th></th>
+                        <th>N°</th>
+                        <th>Type de billet</th>
+                        <th>Prix </th>
+                        <th>Vol</th>
+                        <th>Compagnie</th>                        
                       </tr>
                     </thead>
                     <tbody>
-                    @foreach($vols as $vol)                  
+                    @foreach($billets as $billet)                  
                     <tr>	
-                        <td>{{$vol->IdVol}}</td>
-                        <td>{{$vol->CodeVol}}</td>
-                        <td>{{$vol->NomCompagnie}}</td>
-                        <td>{{$vol->DateDepart}}</td>
-                        <td>{{$vol->DateArrive}}</td>
-                        <td><a class="btn btn-success" href="{{route('vols.edit',$vol->IdVol)}}">Modifier</a></td>
+                        <td>{{$billet->IdBillet}}</td>
+                        <td>{{$billet->TypeBille}}</td>
+                        <td>{{$billet->prix}}</td>
+                        <td>{{$billet->CodeVol}}</td>
+                        <td>{{$billet->NomCompagnie}}</td>
+                        <td><a class="btn btn-success" href="{{route('billets.edit',$billet->IdBillet)}}">Modifier</a></td>
                         <td>
-                        	<form action="{{route('vols.destroy',$vol->IdVol)}}" method="POST" >
+                        	<form action="{{route('billets.destroy',$billet->IdBillet)}}" method="POST" >
                         		{{csrf_field()}}
                         		{{method_field('DELETE')}}
                         		<input type="submit" value="Supprimer" name="Supprimer" class="btn btn-danger">
@@ -117,7 +115,7 @@
                 </table>
                </div>
 			    
-				<a class="btn btn-info" href="{{route('vols.create')}}"> Ajouter Vol</a>
+				<a class="btn btn-info" href="{{route('billets.create')}}"> Créer un billet</a>
 		 	</div>
 			
 		

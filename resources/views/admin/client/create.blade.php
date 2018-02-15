@@ -8,12 +8,16 @@
 	<link rel="icon" href="../../../../favicon.ico">
 	
 	<title>FATNAS-VOYAGE Administrateur</title>
+
+	<!--<link href="{{asset('css/style.default.css')}}" rel="stylesheet">-->
 	
 	<!-- Bootstrap core CSS -->
 	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 	
 	<!-- Custom styles for this template -->
 	<link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+
+
 	</head>
 	
 	<body>
@@ -31,7 +35,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item active">
 				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
 			</li>
 			<li class="nav-item ">
@@ -40,7 +44,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
 			</li>
-			<li class="nav-item active">
+			<li class="nav-item ">
 				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
 			</li>
 		</ul>	
@@ -69,60 +73,58 @@
 	</div>
 	
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-		<h1>Tableau de Bord</h1>
-		@if(session()->has('compagnie'))
-			<div class="alert alert-success">
-				{{session()->get('compagnie')}}
-			</div>
-		@endif
-		@if(session()->has('volSuccess'))
-			<div class="alert alert-info">
-				{{session()->get('VolSuccess')}}
-			</div>
-		@endif
-			<div class="row">
-				<div class="table-responsive">
-							    
-                <table class="table table-primary mb30">
-                    <thead>
-                      <tr>
-                        <th>N° du Vol</th>
-                        <th>Code du vol </th>
-                        <th>Nom de la compagnie</th>
-                        <th>Date de Depart</th>
-                        <th>Date d'arrivée</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($vols as $vol)                  
-                    <tr>	
-                        <td>{{$vol->IdVol}}</td>
-                        <td>{{$vol->CodeVol}}</td>
-                        <td>{{$vol->NomCompagnie}}</td>
-                        <td>{{$vol->DateDepart}}</td>
-                        <td>{{$vol->DateArrive}}</td>
-                        <td><a class="btn btn-success" href="{{route('vols.edit',$vol->IdVol)}}">Modifier</a></td>
-                        <td>
-                        	<form action="{{route('vols.destroy',$vol->IdVol)}}" method="POST" >
-                        		{{csrf_field()}}
-                        		{{method_field('DELETE')}}
-                        		<input type="submit" value="Supprimer" name="Supprimer" class="btn btn-danger">
-                        	</form>
-                    	</td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-               </div>
-			    
-				<a class="btn btn-info" href="{{route('vols.create')}}"> Ajouter Vol</a>
-		 	</div>
-			
+		<h1>Gestion des clients</h1>
+
 		
-	
-	
+			<form id="basicForm" action="{{route('clients.store')}}" method="POST"  class="form-horizontal">
+				{{csrf_field()}}
+				<div class="form-group">
+		            <label class="col-sm-3 control-label" ><span class="text-success">Nom du Client</span></label>
+		            <div class="col-sm-6">
+		               <input type="text" name="Nom" placeholder="" required="required" class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Nom','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-success">Prenom du Client</span></label>
+		            <div class="col-sm-6">
+		               <input type="text" name="Prenom"  required="required" class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Prenom','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-success">Adresse</span></label>
+		            <div class="col-sm-6">
+		               <input type="text" name="Adresse"  class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Adresse','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-success">Date de Naissance</span></label>
+		            <div class="col-sm-6">
+		               <input type="date" required="required" name="Naissance" placeholder=""  class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Naissance','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-success">Contact</span></label>
+		            <div class="col-sm-6">
+		               <input type="text" name="Contact" required="required" placeholder=""  class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Contact','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-success">Email</span></label>
+		            <div class="col-sm-6">
+		               <input type="mail" name="Email" required="required" placeholder=""  class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Email','<div class="alert alert-danger">:message</div>') !!}
+            	
+            	<button type="submit" class="btn btn-primary">AJOUTER</button>
+            	
+			</form>
+			<br><button type="submit" class="btn btn-danger"><a href="{{route('vols.index')}}">ANNULER</a></button>		 								
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

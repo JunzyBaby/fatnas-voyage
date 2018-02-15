@@ -38,7 +38,7 @@ class Vol extends Model
     /**
      * @var array
      */
-    protected $fillable = ['CodeVol', 'DateDepart', 'DateArrive', 'NbrePlace', 'DureeVol', 'Destination', 'updated_at', 'created_at', 'IdCompagnie'];
+    protected $fillable = ['CodeVol', 'DateDepart', 'DateArrive', 'NbrePlace', 'DureeVol', 'Destination','Statut', 'updated_at', 'created_at', 'IdCompagnie'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -18,7 +18,7 @@
 	
 	<body>
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand" href="#">ADMINISTRATEUR FS</a>
+		<a class="navbar-brand" href="#">RECEPTIONNISTE  FS</a>
 		<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -26,22 +26,22 @@
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item ">
-				<a class="nav-link" href="{{route('admin_path')}}">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
+				<a class="nav-link" href="{{route('reception_path')}}">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item ">
-				<a class="nav-link" href="{{route('compagnies.index')}}">Compagnies</a>
+				<a class="nav-link" href="{{route('reception_billet')}}">Billets</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
+			<li class="nav-item ">
+				<a class="nav-link" href="{{route('reception_client')}}">Clients</a>
+			</li>
+			<li class="nav-item ">
+				<a class="nav-link" href="{{route('reception_compagnie')}}">Compagnies</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
+				<a class="nav-link" href="{{route('reception_reservation')}}">Réservations</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{route('reception_vol')}}">Vols</a>
 			</li>
 		</ul>	
 	</div>
@@ -70,14 +70,15 @@
 	
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 		<h1>Tableau de Bord</h1>
-		@if(session()->has('compagnie'))
+		<h3>#Liste des Réservations</h3>
+		@if(session()->has('reservation.confirme'))
 			<div class="alert alert-success">
-				{{session()->get('compagnie')}}
+				{{session()->get('reservation.confirme')}}
 			</div>
 		@endif
-		@if(session()->has('volSuccess'))
+		@if(session()->has('client.create'))
 			<div class="alert alert-info">
-				{{session()->get('VolSuccess')}}
+				{{session()->get('client.create')}}
 			</div>
 		@endif
 			<div class="row">
@@ -86,29 +87,52 @@
                 <table class="table table-primary mb30">
                     <thead>
                       <tr>
-                        <th>N° du Vol</th>
-                        <th>Code du vol </th>
-                        <th>Nom de la compagnie</th>
-                        <th>Date de Depart</th>
-                        <th>Date d'arrivée</th>
-                        <th></th>
-                        <th></th>
+                        <th>N°</th>
+                        <th>Nom</th>
+                        <th>Prenom </th>
+                        <th>Date de Reservat°</th>
+                        <th>Nbre Place</th>
+                        <th>Contact</th>
+                        <th>Code </th>
+                        <th>Destination</th>
+                        <th>Depart</th>
+                        <th>Arrivé</th>
+                        <th>Statut</th>
                       </tr>
                     </thead>
                     <tbody>
-                    @foreach($vols as $vol)                  
+                    @foreach($reservations as $reservation)                  
                     <tr>	
-                        <td>{{$vol->IdVol}}</td>
-                        <td>{{$vol->CodeVol}}</td>
-                        <td>{{$vol->NomCompagnie}}</td>
-                        <td>{{$vol->DateDepart}}</td>
-                        <td>{{$vol->DateArrive}}</td>
-                        <td><a class="btn btn-success" href="{{route('vols.edit',$vol->IdVol)}}">Modifier</a></td>
+                        <td>{{$reservation->IdReservation}}</td>
+                        <td>{{$reservation->NomClient}}</td>
+                        <td>{{$reservation->PrenomClient}}</td>
+                        <td>{{$reservation->DateReservation}}</td>
+                        <td>{{$reservation->NbrPlace}}</td>
+                        <td>{{$reservation->ContactClient}}</td>
+                        <td>{{$reservation->CodeVol}}</td>
+                        <td>{{$reservation->Destination}}</td>
+                        <td>{{$reservation->DateDepart}}</td>
+                        <td>{{$reservation->DateArrive}}</td>
+                        <td style="color: red;">@if(empty($reservation->statut))
+                        		Non confirmé
+                        	@else
+                        		{{$reservation->statut}}
+                        	@endif
+                        </td>
                         <td>
-                        	<form action="{{route('vols.destroy',$vol->IdVol)}}" method="POST" >
+                        	<form action="{{route('reservers.update',$reservation->IdReservation)}}" method="POST" >
                         		{{csrf_field()}}
-                        		{{method_field('DELETE')}}
-                        		<input type="submit" value="Supprimer" name="Supprimer" class="btn btn-danger">
+                        		{{method_field('PUT')}}
+                        		<input type="hidden" name="confirme" value="confirmé">
+                        		<input type="submit" value="Confirmer" name="Supprimer" class="btn btn-danger">
+                        	</form>
+                        </td>
+                        <td>
+                        	<form action="{{route('reservers.update',$reservation->IdReservation)}}" method="POST" >
+                        		{{csrf_field()}}
+                        		{{method_field('PUT')}}
+                        		<input type="hidden" name="confirme" value="confirmé">
+                        		<input type="submit" value="Confirmer" name="Supprimer" class="btn btn-danger">
                         	</form>
                     	</td>
                     </tr>
@@ -117,7 +141,7 @@
                 </table>
                </div>
 			    
-				<a class="btn btn-info" href="{{route('vols.create')}}"> Ajouter Vol</a>
+				
 		 	</div>
 			
 		

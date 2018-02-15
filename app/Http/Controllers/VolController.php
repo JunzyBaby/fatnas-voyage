@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\VolFormRequest;
 use App\Vol;
 use App\Compagnie;
 use DB;
@@ -40,9 +41,20 @@ class VolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VolFormRequest $request)
     {
-        //
+        Vol::create([
+            'CodeVol'=>$request->code,
+            'DateDepart'=>$request->depart,
+            'DateArrive'=>$request->arrive,
+            'NbrePlace'=>$request->place,
+            'DureeVol'=>$request->duree,
+            'Destination'=>$request->destination,
+            'Statut'=>$request->statut,
+            'IdCompagnie'=>$request->compagnie
+        ]);
+        session()->flash('volSuccess','Vol ajouté avec success!');
+        return redirect()->route('vols.index');
     }
 
     /**
@@ -87,6 +99,7 @@ class VolController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Vol::destroy($id);
+        return redirect()->route('vols.index');
     }
 }

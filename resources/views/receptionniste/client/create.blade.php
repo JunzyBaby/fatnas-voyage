@@ -7,7 +7,7 @@
 	<meta name="author" content="">
 	<link rel="icon" href="../../../../favicon.ico">
 	
-	<title>FATNAS-VOYAGE Administrateur</title>
+	<title>FATNAS-VOYAGE Receptionniste</title>
 
 	<!--<link href="{{asset('css/style.default.css')}}" rel="stylesheet">-->
 	
@@ -22,7 +22,7 @@
 	
 	<body>
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand" href="#">ADMINISTRATEUR FS</a>
+		<a class="navbar-brand" href="#">RECEPTIONNISTE FS</a>
 		<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -35,16 +35,16 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item active">
 				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
 			</li>
 			<li class="nav-item ">
 				<a class="nav-link" href="{{route('compagnies.index')}}">Compagnies</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
+				<a class="nav-link" href="{{route('reception_reservation')}}">Réservations</a>
 			</li>
-			<li class="nav-item active">
+			<li class="nav-item ">
 				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
 			</li>
 		</ul>	
@@ -73,70 +73,54 @@
 	</div>
 	
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-		<h1>Tableau de Bord</h1>
+		<h1>Gestion des clients</h1>
+
 		
-			<form id="basicForm" action="{{route('vols.store')}}" method="POST"  class="form-horizontal">
+			<form id="basicForm" action="{{route('clients.store')}}" method="POST"  class="form-horizontal">
 				{{csrf_field()}}
 				<div class="form-group">
-		            <label class="col-sm-3 control-label" ><span class="text-success">Code du Vol</span></label>
+		            <label class="col-sm-3 control-label" ><span class="text-success">Nom du Client</span></label>
 		            <div class="col-sm-6">
-		               <input type="text" name="code" placeholder="" required="required" class="form-control" />
+		               <input type="text" name="Nom" placeholder="" required="required" class="form-control" />
 		            </div>
             	</div>
-            	{!! $errors->first('code','<div class="alert alert-danger">:message</div>') !!}
+            	{!! $errors->first('Nom','<div class="alert alert-danger">:message</div>') !!}
             	<div class="form-group">
-		            <label class="col-sm-3 control-label"><span class="text-success">Date de Depart</span></label>
+		            <label class="col-sm-3 control-label"><span class="text-success">Prenom du Client</span></label>
 		            <div class="col-sm-6">
-		               <input type="date" name="depart"  required="required" class="form-control" />
+		               <input type="text" name="Prenom"  required="required" class="form-control" />
 		            </div>
             	</div>
-            	{!! $errors->first('depart','<div class="alert alert-danger">:message</div>') !!}
+            	{!! $errors->first('Prenom','<div class="alert alert-danger">:message</div>') !!}
             	<div class="form-group">
-		            <label class="col-sm-3 control-label"><span class="text-success">Date d'Arrivée</span></label>
+		            <label class="col-sm-3 control-label"><span class="text-success">Adresse</span></label>
 		            <div class="col-sm-6">
-		               <input type="date" name="arrive"  class="form-control" />
+		               <input type="text" name="Adresse"  class="form-control" />
 		            </div>
             	</div>
-            	{!! $errors->first('arrive','<div class="alert alert-danger">:message</div>') !!}
+            	{!! $errors->first('Adresse','<div class="alert alert-danger">:message</div>') !!}
             	<div class="form-group">
-		            <label class="col-sm-3 control-label"><span class="text-success">Nbre de Place</span></label>
+		            <label class="col-sm-3 control-label"><span class="text-success">Date de Naissance</span></label>
 		            <div class="col-sm-6">
-		               <input type="number" required="required" name="place" placeholder=""  class="form-control" />
+		               <input type="date" required="required" name="Naissance" placeholder=""  class="form-control" />
 		            </div>
             	</div>
-            	{!! $errors->first('place','<div class="alert alert-danger">:message</div>') !!}
+            	{!! $errors->first('Naissance','<div class="alert alert-danger">:message</div>') !!}
             	<div class="form-group">
-		            <label class="col-sm-3 control-label"><span class="text-success">Durée du vol</span></label>
+		            <label class="col-sm-3 control-label"><span class="text-success">Contact</span></label>
 		            <div class="col-sm-6">
-		               <input type="time" name="duree" required="required" placeholder=""  class="form-control" />
+		               <input type="text" name="Contact" required="required" placeholder=""  class="form-control" />
 		            </div>
             	</div>
-            	{!! $errors->first('duree','<div class="alert alert-danger">:message</div>') !!}
+            	{!! $errors->first('Contact','<div class="alert alert-danger">:message</div>') !!}
             	<div class="form-group">
-		            <label class="col-sm-3 control-label"><span class="text-success">Destination du vol</span></label>
+		            <label class="col-sm-3 control-label"><span class="text-success">Email</span></label>
 		            <div class="col-sm-6">
-		               <input type="text" name="destination" required="required" placeholder=""  class="form-control" />
+		               <input type="mail" name="Email" required="required" placeholder=""  class="form-control" />
 		            </div>
             	</div>
-            	{!! $errors->first('destination','<div class="alert alert-danger">:message</div>') !!}
-            	<div class="form-group">
-		            <label class="col-sm-3 control-label"><span class="text-success">Statut du vol</span></label>
-		            <div class="col-sm-6">
-		               <input type="text" name="statut" required="required" placeholder=""  class="form-control" />
-		            </div>
-            	</div>
-            	{!! $errors->first('statut','<div class="alert alert-danger">:message</div>') !!}
-            	<div class="form-group">
-		            <label class="col-sm-3 control-label"><span class="text-success">Compagnie</span></label>
-		            <div class="col-sm-6">
-		            	<select name="compagnie"  class="form-control">
-		            	@foreach($compagnies as $compagnie)
-		               	<option value="{{$compagnie->IdCompagnie}}">{{$compagnie->NomCompagnie}}</option>
-		               	@endforeach
-		            </select>
-		            </div>
-            	</div>
-            	{!! $errors->first('compagnie','<div class="alert alert-danger">:message</div>') !!}
+            	{!! $errors->first('Email','<div class="alert alert-danger">:message</div>') !!}
+            	
             	<button type="submit" class="btn btn-primary">AJOUTER</button>
             	
 			</form>

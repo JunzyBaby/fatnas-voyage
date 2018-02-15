@@ -28,19 +28,19 @@
 			<li class="nav-item ">
 				<a class="nav-link" href="{{route('admin_path')}}">Home <span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item ">
 				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item ">
 				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
 			</li>
 			<li class="nav-item ">
 				<a class="nav-link" href="{{route('compagnies.index')}}">Compagnies</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item active">
 				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
 			</li>
-			<li class="nav-item active">
+			<li class="nav-item">
 				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
 			</li>
 		</ul>	
@@ -70,14 +70,14 @@
 	
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 		<h1>Tableau de Bord</h1>
-		@if(session()->has('compagnie'))
+		@if(session()->has('client.update'))
 			<div class="alert alert-success">
-				{{session()->get('compagnie')}}
+				{{session()->get('client.update')}}
 			</div>
 		@endif
-		@if(session()->has('volSuccess'))
+		@if(session()->has('client.create'))
 			<div class="alert alert-info">
-				{{session()->get('VolSuccess')}}
+				{{session()->get('client.create')}}
 			</div>
 		@endif
 			<div class="row">
@@ -86,26 +86,34 @@
                 <table class="table table-primary mb30">
                     <thead>
                       <tr>
-                        <th>N° du Vol</th>
-                        <th>Code du vol </th>
-                        <th>Nom de la compagnie</th>
+                        <th>N°</th>
+                        <th>Nom</th>
+                        <th>Prenom </th>
+                        <th>Date de Reservat°</th>
+                        <th>Nbre de Place</th>
+                        <th>Contact</th>
+                        <th>Code  vol</th>
+                        <th>Destination</th>
                         <th>Date de Depart</th>
-                        <th>Date d'arrivée</th>
-                        <th></th>
-                        <th></th>
+                        <th>Date d'Arrivé</th>
                       </tr>
                     </thead>
                     <tbody>
-                    @foreach($vols as $vol)                  
+                    @foreach($reservations as $reservation)                  
                     <tr>	
-                        <td>{{$vol->IdVol}}</td>
-                        <td>{{$vol->CodeVol}}</td>
-                        <td>{{$vol->NomCompagnie}}</td>
-                        <td>{{$vol->DateDepart}}</td>
-                        <td>{{$vol->DateArrive}}</td>
-                        <td><a class="btn btn-success" href="{{route('vols.edit',$vol->IdVol)}}">Modifier</a></td>
+                        <td>{{$reservation->IdReservation}}</td>
+                        <td>{{$reservation->NomClient}}</td>
+                        <td>{{$reservation->PrenomClient}}</td>
+                        <td>{{$reservation->DateReservation}}</td>
+                        <td>{{$reservation->NbrPlace}}</td>
+                        <td>{{$reservation->ContactClient}}</td>
+                        <td>{{$reservation->CodeVol}}</td>
+                        <td>{{$reservation->Destination}}</td>
+                        <td>{{$reservation->DateDepart}}</td>
+                        <td>{{$reservation->DateArrive}}</td>
+                        <td><a class="btn btn-success" href="{{route('reservations.edit',$reservation->IdReservation)}}">Modifier</a></td>
                         <td>
-                        	<form action="{{route('vols.destroy',$vol->IdVol)}}" method="POST" >
+                        	<form action="{{route('clients.destroy',$reservation->IdReservation)}}" method="POST" >
                         		{{csrf_field()}}
                         		{{method_field('DELETE')}}
                         		<input type="submit" value="Supprimer" name="Supprimer" class="btn btn-danger">
@@ -117,7 +125,7 @@
                 </table>
                </div>
 			    
-				<a class="btn btn-info" href="{{route('vols.create')}}"> Ajouter Vol</a>
+				<a class="btn btn-info" href="{{route('clients.create')}}"> Ajouter une reservation</a>
 		 	</div>
 			
 		

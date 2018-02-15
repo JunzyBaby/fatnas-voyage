@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Billet;
-use App\Compagnie;
-use App\Vol;
-use DB;
+use App\Reservation;
 
-class BilletController extends Controller
+class receptionReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +14,7 @@ class BilletController extends Controller
      */
     public function index()
     {
-        $billets=DB::table('billet')
-            ->join('vol','billet.IdVol','=','vol.IdVol')
-            ->join('compagnie','vol.IdCompagnie','=','compagnie.IdCompagnie')
-            ->select('billet.*','vol.CodeVol','compagnie.NomCompagnie')
-            ->get();
-        return view('admin.billet.index',compact('billets'));
+        //
     }
 
     /**
@@ -32,12 +24,7 @@ class BilletController extends Controller
      */
     public function create()
     {
-        $vols=DB::table('vol')
-            ->join('compagnie','vol.IdCompagnie','=','compagnie.IdCompagnie')
-            ->select('compagnie.NomCompagnie','vol.IdVol')
-            ->get();
-
-        return view('admin.billet.create',compact('vols'));
+        //
     }
 
     /**
@@ -48,18 +35,7 @@ class BilletController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,
-            ['categorie'=>'required|min:4','prix'=>'required'],
-            ['required'=>'Le champ :attribute est requis','min'=>'Le champ :attribute doit avoir au moin :min caractère',
-            'numeric'=>'Le champ :attribute doit être un nombre']
-        );
-        Billet::create([
-            'TypeBille'=>$request->categorie,
-            'prix'=>$request->prix,
-            'IdVol'=>$request->vol,
-        ]);
-        session()->flash('billetSuccess','Billet ajouté avec succès');
-        return redirect()->route('billets.index');
+        
     }
 
     /**
@@ -81,7 +57,8 @@ class BilletController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reservation=Reservation::findOrFail($id);
+        return view('receptionniste.reservation.edit',compact('reservation'));
     }
 
     /**
@@ -93,7 +70,9 @@ class BilletController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reservation=Reservation::findOrFail($id);
+        $reservation->update(['statut'=>$request->confirme]);
+        return redirect()->route('reception_reservation');
     }
 
     /**
@@ -104,7 +83,8 @@ class BilletController extends Controller
      */
     public function destroy($id)
     {
-        Billet::destroy($id);
-        return redirect()->route('billets.index');
+       
+
+        
     }
 }

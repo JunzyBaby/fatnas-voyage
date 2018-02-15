@@ -7,18 +7,22 @@
 	<meta name="author" content="">
 	<link rel="icon" href="../../../../favicon.ico">
 	
-	<title>FATNAS-VOYAGE Administrateur</title>
+	<title>FATNAS-VOYAGE Receptionniste</title>
+
+	<!--<link href="{{asset('css/style.default.css')}}" rel="stylesheet">-->
 	
 	<!-- Bootstrap core CSS -->
 	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 	
 	<!-- Custom styles for this template -->
 	<link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+
+
 	</head>
 	
 	<body>
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand" href="#">ADMINISTRATEUR FS</a>
+		<a class="navbar-brand" href="#">RECEPTIONNISTE FS</a>
 		<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -28,22 +32,22 @@
 			<li class="nav-item ">
 				<a class="nav-link" href="{{route('admin_path')}}">Home <span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item ">
 				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item ">
 				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
 			</li>
 			<li class="nav-item ">
 				<a class="nav-link" href="{{route('compagnies.index')}}">Compagnies</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
-			</li>
 			<li class="nav-item active">
+				<a class="nav-link" href="{{route('reception_reservation')}}">Réservations</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
 			</li>
-		</ul>	
+		</ul>
 	</div>
 	</nav>
 	
@@ -70,55 +74,47 @@
 	
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 		<h1>Tableau de Bord</h1>
-		@if(session()->has('compagnie'))
-			<div class="alert alert-success">
-				{{session()->get('compagnie')}}
-			</div>
-		@endif
-		@if(session()->has('volSuccess'))
-			<div class="alert alert-info">
-				{{session()->get('VolSuccess')}}
-			</div>
-		@endif
-			<div class="row">
-				<div class="table-responsive">
-							    
-                <table class="table table-primary mb30">
-                    <thead>
-                      <tr>
-                        <th>N° du Vol</th>
-                        <th>Code du vol </th>
-                        <th>Nom de la compagnie</th>
-                        <th>Date de Depart</th>
-                        <th>Date d'arrivée</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($vols as $vol)                  
-                    <tr>	
-                        <td>{{$vol->IdVol}}</td>
-                        <td>{{$vol->CodeVol}}</td>
-                        <td>{{$vol->NomCompagnie}}</td>
-                        <td>{{$vol->DateDepart}}</td>
-                        <td>{{$vol->DateArrive}}</td>
-                        <td><a class="btn btn-success" href="{{route('vols.edit',$vol->IdVol)}}">Modifier</a></td>
-                        <td>
-                        	<form action="{{route('vols.destroy',$vol->IdVol)}}" method="POST" >
-                        		{{csrf_field()}}
-                        		{{method_field('DELETE')}}
-                        		<input type="submit" value="Supprimer" name="Supprimer" class="btn btn-danger">
-                        	</form>
-                    	</td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-               </div>
-			    
-				<a class="btn btn-info" href="{{route('vols.create')}}"> Ajouter Vol</a>
-		 	</div>
+		
+			<form id="basicForm" action="{{route('reservers.update',$reservation)}}" method="POST" class="form-horizontal">
+				{{csrf_field()}}
+				{{method_field('PUT')}}
+				<div class="form-group">
+		            <label class="col-sm-3 control-label" ><span class="text-success">Nom du Client</span></label>
+		            <div class="col-sm-6">
+		               <input type="text" name="Nom" value="{{old('Nom')?? $client->NomClient}}" placeholder="" required="required" class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Nom','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-success">Prenom du Client</span></label>
+		            <div class="col-sm-6">
+		               <input type="text" value="{{old('Prenom')?? $client->PrenomClient}}" name="Prenom"  required="required" class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Prenom','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-success">Adresse</span></label>
+		            <div class="col-sm-6">
+		               <input type="text" value="{{old('Adresse')?? $client->Adresse}}" name="Adresse"  class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Adresse','<div class="alert alert-danger">:message</div>') !!}
+            	<div class="form-group">
+		            <label class="col-sm-3 control-label"><span class="text-success">Date de Naissance</span></label>
+		            <div class="col-sm-6">
+		               <input type="date" value="{{old('Naissance')?? $client->DateNaissClient}}" required="required" name="Naissance" placeholder=""  class="form-control" />
+		            </div>
+            	</div>
+            	{!! $errors->first('Naissance','<div class="alert alert-danger">:message</div>') !!}
+            	
+            	
+            	<button type="submit" class="btn btn-primary">MODIFIER</button>
+            	
+			</form>
+			<br><button type="submit" class="btn btn-danger"><a href="{{route('clients.index')}}">Confirmer</a></button>
+			
+		 	
+		
 			
 		
 	

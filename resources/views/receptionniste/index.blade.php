@@ -7,7 +7,7 @@
 	<meta name="author" content="">
 	<link rel="icon" href="../../../../favicon.ico">
 	
-	<title>FATNAS-VOYAGE Administrateur</title>
+	<title>FATNAS-VOYAGE Receptionniste</title>
 	
 	<!-- Bootstrap core CSS -->
 	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
@@ -18,30 +18,30 @@
 	
 	<body>
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand" href="#">ADMINISTRATEUR FS</a>
+		<a class="navbar-brand" href="#">RECEPTIONNISTE FS</a>
 		<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 	
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="{{route('admin_path')}}">Home <span class="sr-only">(current)</span></a>
+			<li class="nav-item active ">
+				<a class="nav-link" href="{{route('reception_path')}}">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item ">
+				<a class="nav-link" href="{{route('reception_billet')}}">Billets</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
+				<a class="nav-link" href="{{route('client.index')}}">Clients</a>
+			</li>
+			<li class="nav-item  ">
+				<a class="nav-link" href="{{route('reception_compagnie')}}">Compagnies</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
+				<a class="nav-link" href="{{route('reception_reservation')}}">Réservations</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('compagnies.index')}}">Compagnies</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
+			<li class="nav-item ">
+				<a class="nav-link" href="{{route('reception_vol')}}">Vols</a>
 			</li>
 		</ul>	
 	</div>
@@ -73,38 +73,38 @@
 		
 			<div class="row">
 			    <div class="col-sm-2">
-			    	<a href="{{route('billets.index')}}">
+			    	<a href="{{route('reception_billet')}}">
 					<img src="{{asset('images/billet.jpg')}}" class="img-thumbnail" alt="" width="200" height="230">
 					</a><br>
-					<a href="" class="" >Espace des Billets</a>
+					<a href="{{route('reception_billet')}}"" class="" >Espace des Billets</a>
 			    </div>
 
 			    <div class="col-sm-2">
-			    	<a href="{{route('clients.index')}}">
+			    	<a href="{{route('client.index')}}">
 					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
 					</a><br>
-				<a href="" class="">Espaces des Clients</a>
+				<a href="{{route('client.index')}}" class="">Espaces des Clients</a>
 			    </div>
 
 			    <div class="col-sm-2">
-			    	<a href="{{route('compagnies.index')}}">
+			    	<a href="{{route('reception_compagnie')}}">
 					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
 					</a><br>
-				<a href="{{route('compagnies.index')}}" class="">Espace des compagnie</a>
+				<a href="{{route('reception_compagnie')}}" class="">Espace des compagnies</a>
 			    </div>
 
 			    <div class="col-sm-2">			    	
-					<a href="{{route('reservations.index')}}">
+					<a href="{{route('reception_reservation')}}">
 					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
 					</a><br>
-				<a href="" class="">Espace des reservations</a>			
+				<a href="{{route('reception_reservation')}}" class="">Espace des reservations</a>			
 			    </div>
 
 			    <div class="col-sm-2">			    	
-					<a href="{{route('vols.index')}}">
+					<a href="{{route('reception_vol')}}">
 					<img src="{{asset('images/avion.png')}}" class="img-thumbnail" alt="" width="200" height="230">
 					</a><br>
-				<a href="" class="">Espace des vols</a>			
+				<a href="{{route('reception_vol')}}" class="">Espace des vols</a>			
 			    </div> 
 
 		 	 </div>

@@ -90,8 +90,8 @@
                         <th>Code de la compagnie</th>
                         <th>Nom de la compagnie</th>
                         <th>Logo de la compagnie</th>
-                        <th>Modifier</th>
-                        <th>Supprimer</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>

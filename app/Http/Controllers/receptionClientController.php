@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
-
-class ClientController extends Controller
+class receptionClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients=Client::all();
-        return view('admin.client.index',compact('clients'));
+        return view('receptionniste.client.index',compact('clients'));
     }
 
     /**
@@ -25,7 +24,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('admin.client.create');
+        return view('receptionniste.client.create');
     }
 
     /**
@@ -60,7 +59,7 @@ class ClientController extends Controller
         ]);
 
         session()->flash('client.create','Client ajouté avec succès');
-        return redirect()->route('clients.index');
+        return redirect()->route('client.index');
     }
 
     /**
@@ -83,7 +82,7 @@ class ClientController extends Controller
     public function edit($id)
     {
         $client=Client::findOrFail($id);
-        return view('admin.client.edit',compact('client'));
+        return view('receptionniste.client.edit',compact('client'));
     }
 
     /**
@@ -121,7 +120,7 @@ class ClientController extends Controller
 
         session()->flash('client.update','Modification effectué avec succès!');
 
-        return redirect()->route('clients.index');
+        return redirect()->route('client.index');
     }
 
     /**
@@ -133,6 +132,6 @@ class ClientController extends Controller
     public function destroy($id)
     {
         Client::destroy($id);
-        return redirect()->route('clients.index');
+        return redirect()->route('client.index');
     }
 }

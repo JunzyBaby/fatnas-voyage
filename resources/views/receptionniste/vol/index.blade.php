@@ -18,7 +18,7 @@
 	
 	<body>
 	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand" href="#">ADMINISTRATEUR FS</a>
+		<a class="navbar-brand" href="#">RECEPTIONNISTE FS</a>
 		<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -26,22 +26,22 @@
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item ">
-				<a class="nav-link" href="{{route('admin_path')}}">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('billets.index')}}">Billets</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{{route('clients.index')}}">Clients</a>
+				<a class="nav-link" href="{{route('reception_path')}}">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item ">
-				<a class="nav-link" href="{{route('compagnies.index')}}">Compagnies</a>
+				<a class="nav-link" href="{{route('reception_billet')}}">Billets</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{{route('reservations.index')}}">Réservations</a>
+				<a class="nav-link" href="{{route('client.index')}}">Clients</a>
+			</li>
+			<li class="nav-item  ">
+				<a class="nav-link" href="{{route('reception_compagnie')}}">Compagnies</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{route('reception_reservation')}}">Réservations</a>
 			</li>
 			<li class="nav-item active">
-				<a class="nav-link" href="{{route('vols.index')}}">Vols</a>
+				<a class="nav-link" href="{{route('reception_vol')}}">Vols</a>
 			</li>
 		</ul>	
 	</div>
@@ -70,16 +70,7 @@
 	
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
 		<h1>Tableau de Bord</h1>
-		@if(session()->has('compagnie'))
-			<div class="alert alert-success">
-				{{session()->get('compagnie')}}
-			</div>
-		@endif
-		@if(session()->has('volSuccess'))
-			<div class="alert alert-info">
-				{{session()->get('VolSuccess')}}
-			</div>
-		@endif
+		<h3># Listes des vols disponibles</h3>
 			<div class="row">
 				<div class="table-responsive">
 							    
@@ -91,7 +82,8 @@
                         <th>Nom de la compagnie</th>
                         <th>Date de Depart</th>
                         <th>Date d'arrivée</th>
-                        <th></th>
+                        <th>Place(s) restante(s)</th>
+                        <th>Date de Création</th>
                         <th></th>
                       </tr>
                     </thead>
@@ -103,21 +95,15 @@
                         <td>{{$vol->NomCompagnie}}</td>
                         <td>{{$vol->DateDepart}}</td>
                         <td>{{$vol->DateArrive}}</td>
-                        <td><a class="btn btn-success" href="{{route('vols.edit',$vol->IdVol)}}">Modifier</a></td>
-                        <td>
-                        	<form action="{{route('vols.destroy',$vol->IdVol)}}" method="POST" >
-                        		{{csrf_field()}}
-                        		{{method_field('DELETE')}}
-                        		<input type="submit" value="Supprimer" name="Supprimer" class="btn btn-danger">
-                        	</form>
-                    	</td>
+                        <td>{{$vol->NbrePlace}}</td>
+                        <td>{{$vol->created_at}}</td>
                     </tr>
                     @endforeach
                     </tbody>
                 </table>
                </div>
 			    
-				<a class="btn btn-info" href="{{route('vols.create')}}"> Ajouter Vol</a>
+				
 		 	</div>
 			
 		
