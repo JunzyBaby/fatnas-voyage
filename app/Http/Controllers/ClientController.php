@@ -133,6 +133,7 @@ class ClientController extends Controller
     public function destroy($id)
     {
         Client::destroy($id);
+        session()->flash('client.delete','Client supprimer avec succès');
         return redirect()->route('clients.index');
     }
 }

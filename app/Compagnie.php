@@ -23,6 +23,13 @@ class Compagnie extends Model
     protected $table = 'compagnie';
 
     /**
+    *    @var string 
+
+    */
+
+    protected $softDelete=true;
+
+    /**
      * The primary key for the model.
      * 
      * @var string

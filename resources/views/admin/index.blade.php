@@ -14,6 +14,7 @@
 	
 	<!-- Custom styles for this template -->
 	<link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
+	<link href="{{asset('css/footer.css')}}" rel="stylesheet">
 	</head>
 	
 	<body>
@@ -76,7 +77,7 @@
 			    	<a href="{{route('billets.index')}}">
 					<img src="{{asset('images/billet.jpg')}}" class="img-thumbnail" alt="" width="200" height="230">
 					</a><br>
-					<a href="" class="" >Espace des Billets</a>
+					<a href="{{asset('images/billet.jpg')}}" class="" >Espace des Billets</a>
 			    </div>
 
 			    <div class="col-sm-2">
@@ -88,14 +89,14 @@
 
 			    <div class="col-sm-2">
 			    	<a href="{{route('compagnies.index')}}">
-					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
+					<img src="{{asset('images/voyage.jpg')}}" class="img-thumbnail" alt="" width="200" height="230">
 					</a><br>
 				<a href="{{route('compagnies.index')}}" class="">Espace des compagnie</a>
 			    </div>
 
 			    <div class="col-sm-2">			    	
 					<a href="{{route('reservations.index')}}">
-					<img src="{{asset('images/client.png')}}" class="img-thumbnail" alt="" width="200" height="230">
+					<img src="{{asset('images/reservation.jpg')}}" class="img-thumbnail" alt="" width="200" height="230">
 					</a><br>
 				<a href="" class="">Espace des reservations</a>			
 			    </div>
@@ -108,6 +109,12 @@
 			    </div> 
 
 		 	 </div>
+		 	</main>
+		 	<footer class="footer">
+		      <div class="container">
+		        <span class="text-muted">Place sticky footer content here.</span>
+		      </div>
+		    </footer>
 			
 		
 	
@@ -115,12 +122,12 @@
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	<!---->
+	
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-	<script src="../../../../assets/js/vendor/popper.min.js"></script>
-	<script src="../../../../dist/js/bootstrap.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="../../../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</body>
 	</html>
 	

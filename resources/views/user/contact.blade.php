@@ -27,27 +27,37 @@
 				</li>
 			</ul>
 		</div>
+		@if(session()->has('message.success'))
+		<div class="row">		
+			<span class="card-panel red center offset-l6">{{session()->get('message.success')}}</span>
+		</div>
+		@endif
 		<div class="col l8" data-kui-anim="zoomIn">
 			<h4 class="center-align">Laissez nous un message</h4>
 			<div class="row z-depth-1">
-				<form class="col s12">
+				<form class="col s12" method="POST" action="{{route('messages.store')}}">
+					{{csrf_field()}}
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">account_circle</i>
-							<input id="icon_prefix" type="text" class="validate">
+							<input id="icon_prefix" name="nom" type="text" class="validate">
 							<label for="icon_prefix">Votre nom</label>
 						</div>
+						{!! $errors->first('nom','<p style="color: red">:message</p>') !!}
 						<div class="input-field col s12">
 							<i class="material-icons prefix">email</i>
-							<input id="email" type="email" class="validate">
+							<input id="email" name="email" type="email" class="validate">
 							<label for="email" data-error="incorrect" data-success="right">Email</label>
 						</div>
+						{!! $errors->first('email','<p style="color: red">:message</p>') !!}
 						<div class="input-field col s12">
 							<i class="material-icons prefix">insert_comment</i>
-							<textarea id="textarea1" class="materialize-textarea"></textarea>
+							<textarea id="textarea1" name="message" class="materialize-textarea"></textarea>
 							<label for="textarea1">Message</label>
 						</div>
-						<a class="waves-effect waves-light btn right blue"><i class="material-icons left">send</i>envoyer</a>
+						{!! $errors->first('message','<p style="color: red">:message</p>') !!}
+						<input type="submit" class="waves-effect waves-light btn right blue"   name="envoyer" >
+						
 					</div>
 				</div>
 			</form>

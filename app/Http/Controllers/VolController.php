@@ -53,7 +53,7 @@ class VolController extends Controller
             'Statut'=>$request->statut,
             'IdCompagnie'=>$request->compagnie
         ]);
-        session()->flash('volSuccess','Vol ajouté avec success!');
+        session()->flash('vol.create','Vol ajouté avec success!');
         return redirect()->route('vols.index');
     }
 
@@ -76,7 +76,10 @@ class VolController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vol=Vol::findOrFail($id);
+        $compagnies=Compagnie::all();
+        return view('admin.vol.edit',compact('vol','compagnies'));
+
     }
 
     /**
@@ -88,7 +91,20 @@ class VolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $vol=Vol::findOrFail($id);
+        $vol->update([
+            'CodeVol'=>$request->code,
+            'DateDepart'=>$request->depart,
+            'DateArrive'=>$request->arrive,
+            'NbrePlace'=>$request->place,
+            'DureeVol'=>$request->duree,
+            'Destination'=>$request->destination,
+            'Statut'=>$request->statut,
+            'IdCompagnie'=>$request->compagnie
+        ]);
+        session()->flash('vol.update','Vol modifié avec success!');
+        return redirect()->route('vols.index');
+
     }
 
     /**
@@ -100,6 +116,7 @@ class VolController extends Controller
     public function destroy($id)
     {
         Vol::destroy($id);
+        session()->flash('vol.delete','Vol supprimé avec succès');
         return redirect()->route('vols.index');
     }
 }

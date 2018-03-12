@@ -58,7 +58,7 @@ class BilletController extends Controller
             'prix'=>$request->prix,
             'IdVol'=>$request->vol,
         ]);
-        session()->flash('billetSuccess','Billet ajouté avec succès');
+        session()->flash('billet.create','Billet ajouté avec succès');
         return redirect()->route('billets.index');
     }
 
@@ -81,7 +81,13 @@ class BilletController extends Controller
      */
     public function edit($id)
     {
-        //
+        $billet=Billet::find($id);
+        $vols=DB::table('vol')
+            ->join('compagnie','vol.IdCompagnie','=','compagnie.IdCompagnie')
+            ->select('compagnie.NomCompagnie','vol.IdVol')
+            ->get();
+
+        return view('admin.billet.edit',compact('vols','billet'));
     }
 
     /**
@@ -93,7 +99,20 @@ class BilletController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $billet=Billet::findOrFail($id);
+        $this->validate($request,
+            ['categorie'=>'required|min:4','prix'=>'required'],
+            ['required'=>'Le champ :attribute est requis','min'=>'Le champ :attribute doit avoir au moin :min caractère',
+            'numeric'=>'Le champ :attribute doit être un nombre']
+        );
+        $billet->update([
+            'TypeBille'=>$request->categorie,
+            'prix'=>$request->prix,
+            'IdVol'=>$request->vol,
+        ]);
+        
+        session()->flash('billet.update','Billet modifié avec succès');
+        return redirect()->route('billets.index');
     }
 
     /**
@@ -105,6 +124,7 @@ class BilletController extends Controller
     public function destroy($id)
     {
         Billet::destroy($id);
+        session()->flash('billet.destroy','Billet supprimé avec succès');
         return redirect()->route('billets.index');
     }
 }

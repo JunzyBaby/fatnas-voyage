@@ -44,7 +44,7 @@ class CompagnieController extends Controller
             'logo'=>$request->logo->store('image'),
            ]);
 
-        Session()->flash('compagnie','Compagnie ajoutée avec succes');
+        Session()->flash('compagnie.create','Compagnie ajoutée avec succes');
 
         return redirect()->route('compagnies.index');
     }
@@ -88,7 +88,7 @@ class CompagnieController extends Controller
             'logo'=>$request->logo->store('image'),
            ]);
 
-        Session()->flash('compagnieSuccess','Compagnie modifié avec succes');
+        Session()->flash('compagnie.update','Compagnie modifié avec succes');
 
         return redirect()->route('compagnies.index');
 
@@ -103,6 +103,7 @@ class CompagnieController extends Controller
     public function destroy($id)
     {
         Compagnie::destroy($id);
+        session()->flash('compagnie.delete','Compagnie supprimé avec succès');
         return redirect()->route('compagnies.index');
     }
 }

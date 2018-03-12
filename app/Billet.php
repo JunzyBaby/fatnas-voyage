@@ -30,6 +30,13 @@ class Billet extends Model
     protected $primaryKey = 'IdBillet';
 
     /**
+    *    @var string 
+
+    */
+
+    protected $softDelete=true;
+
+    /**
      * @var array
      */
     protected $fillable = ['TypeBille', 'prix', 'updated_at', 'created_at', 'IdVol'];

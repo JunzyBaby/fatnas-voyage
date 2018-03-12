@@ -37,6 +37,13 @@ class Reservation extends Model
     protected $fillable = ['DateReservation', 'NbrPlace','statut', 'updated_at', 'created_at', 'IdClient', 'IdVol'];
 
     /**
+    *    @var string 
+
+    */
+
+    protected $softDelete=true;
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function client()

@@ -8,6 +8,7 @@ use App\Billet;
 use App\Compagnie;
 use App\Client;
 use App\Reservation;
+use Nexmo;
 use DB;
 
 class ReservationController extends Controller
@@ -58,7 +59,7 @@ class ReservationController extends Controller
             if ($placeDispo<0)
             {
                 session()->flash('reservation.erreur','Le nombre limite de place est atteint!');
-                return back();
+                return redirect()->route('reservation_path');
             }
             else
             {
@@ -71,18 +72,21 @@ class ReservationController extends Controller
                 'EmailClient'=>$request->Email,
             ]);
 
+
             $client=Client::where('EmailClient',$request->Email)->first();
+            
             Reservation::create([
                 'DateReservation'=>date('Y-m-d H:m:s'),
                 'NbrPlace'=>$request->Place,
                 'IdClient'=>$client->IdClient,
                 'IdVol'=>$request->IdVol,
             ]);
-
             $vol->update(['NbrePlace'=>$placeDispo]);
-            session()->flash('reservation.success','Reservation Effectué avec succès');
 
-            return redirect()->route('home_path');
+                                   
+            session()->flash('reservation.create','Reservation Effectuée avec succès');
+
+            return redirect()->route('reservation_path');
             }
 
             
@@ -132,6 +136,23 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Reservation::destroy($id);
+        session()->flash('reservation.delete','Reservation supprimer avec succès!');
+        return redirect()->route('reservations.index');
+
+    }
+
+    public function recherche($request)
+    {
+        $vols=Vol::where('Destination',$request('destination'));
+        if ($vols)
+        {
+            return view('user.reservation',compact('vols'));
+        }
+        else
+        {
+            session()->flash('destination.recherche','Aucune destination correspondante');
+            return view('user.reservation');
+        }
     }
 }

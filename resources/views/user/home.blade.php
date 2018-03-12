@@ -58,7 +58,7 @@
           <p class="flow-text">A partir de 400 000 FCFA</p>
         </div>
         <div class="card-action">
-          <a href="#" class="waves-effect waves-light btn blue darken-4 animated fadeOut infinite">Voir l'offre</a>
+          <a href="{{route('reservation_path')}}" class="waves-effect waves-light btn blue darken-4 animated fadeOut infinite">Voir l'offre</a>
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
           <p class="flow-text">A partir de 700 000 FCFA</p>
         </div>
         <div class="card-action">
-          <a href="#" class="waves-effect waves-light btn blue darken-4 animated shake infinite">Voir l'offre</a>
+          <a href="{{route('reservation_path')}}" class="waves-effect waves-light btn blue darken-4 animated shake infinite">Voir l'offre</a>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@
           <p class="flow-text">A partir de 260 000 FCFA</p>
         </div>
         <div class="card-action">
-          <a href="#" class="waves-effect waves-light btn blue darken-4 animated fadeIn infinite">Voir l'offre</a>
+          <a href="{{route('reservation_path')}}" class="waves-effect waves-light btn blue darken-4 animated fadeIn infinite">Voir l'offre</a>
         </div>
       </div>
     </div>

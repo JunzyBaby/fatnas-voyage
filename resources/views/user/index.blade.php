@@ -54,19 +54,19 @@
          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
         <!--  -->
-            <li class=""><a href = "{{route('accueil_path')}}">ACCUEIL</a></li>
-            <li class=""><a href = "{{route('reservation_path')}}">RESERVATION</a></li>
+            <li class="{{set_active_route('accueil_path')}}"><a href = "{{route('accueil_path')}}">ACCUEIL</a></li>
+            <li class="{{set_active_route('reservation_path')}}"><a href = "{{route('reservation_path')}}">RESERVATION</a></li>
             <li><a href = "https://travel.jumia.com" target="_blank">HOTELS</a></li>
-            <li class=" "><a href = "{{route('about_path')}}">A PROPOS</a></li>
-            <li class=""><a href = "{{route('contact_path')}}">NOUS CONTACTER</a></li>
+            <li class="{{set_active_route('about_path')}}"><a href = "{{route('about_path')}}">A PROPOS</a></li>
+            <li class="{{set_active_route('contact_path')}}"><a href = "{{route('contact_path')}}">NOUS CONTACTER</a></li>
 
         </ul>
         <ul class="side-nav" id="mobile-demo">
-            <li class=" "><a href = "{{route('accueil_path')}}">ACCUEIL</a></li>
-            <li class=" "><a href = "{{route('reservation_path')}}">RESERVATION</a></li>
+            <li class=" {{set_active_route('accueil_path')}}"><a href = "{{route('accueil_path')}}">ACCUEIL</a></li>
+            <li class=" {{set_active_route('reservation_path')}}"><a href = "{{route('reservation_path')}}">RESERVATION</a></li>
               <li><a href = "https://travel.jumia.com" target="_blank">HOTELS</a></li>
-            <li class=""><a href = "{{route('about_path')}}">A PROPOS</a></li>
-            <li class=""><a href = "{{route('contact_path')}}">NOUS CONTACTER</a></li>
+            <li class="{{set_active_route('about_path')}}"><a href = "{{route('about_path')}}">A PROPOS</a></li>
+            <li class="{{set_active_route('contact_path')}}"><a href = "{{route('contact_path')}}">NOUS CONTACTER</a></li>
         </ul>
     </div>
    </nav>

@@ -36,6 +36,13 @@ class Vol extends Model
     protected $primaryKey = 'IdVol';
 
     /**
+    *    @var string 
+
+    */
+
+    protected $softDelete=true;
+
+    /**
      * @var array
      */
     protected $fillable = ['CodeVol', 'DateDepart', 'DateArrive', 'NbrePlace', 'DureeVol', 'Destination','Statut', 'updated_at', 'created_at', 'IdCompagnie'];

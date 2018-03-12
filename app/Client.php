@@ -26,6 +26,13 @@ class Client extends Model
     protected $table = 'client';
 
     /**
+    *    @var string 
+
+    */
+
+    protected $softDelete=true;
+
+    /**
      * The primary key for the model.
      * 
      * @var string

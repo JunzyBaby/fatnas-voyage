@@ -7,9 +7,9 @@
 
 		</div>
 		<div class="row z-depth-1 grey">
-			<form action="" method="get" accept-charset="utf-8" class="form-search">
+			<form action="{{route('recherche_path')}}" method="post" accept-charset="utf-8" class="form-search">
 				<div class="col l10 s8">
-					<input type="search" name="" placeholder="Rechercher une destination">
+					<input type="search" name="Destination" placeholder="Rechercher une destination">
 				</div>
 				<div class="col l2 s4">
 					<input type="submit" name="" class="btn waves-effect">
@@ -17,9 +17,17 @@
 			</form>
 		</div>
 	</div>
-	<div class="row">
-		<span class="card-panel red center offset-l6">Hello</span>
+	@if(session()->has('reservation.create'))
+	<div class="row">		
+		<aside class=""><span class="col s12 card-panel white-text red center-align">{{session()->get('reservation.create')}}</span></aside>
 	</div>
+	@endif
+
+	@if(session()->has('reservation.erreur'))
+	<div class="row">		
+		<aside class=""><span class="col s12 card-panel white-text red center-align">{{session()->get('reservation.erreur')}}</span></aside>
+	</div>
+	@endif
 	<div class="row">
 		<table class="z-depth-2 centered responsive-table">
 			

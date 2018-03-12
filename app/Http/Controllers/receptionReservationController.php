@@ -72,6 +72,7 @@ class receptionReservationController extends Controller
     {
         $reservation=Reservation::findOrFail($id);
         $reservation->update(['statut'=>$request->confirme]);
+        session()->flash('reservation.update','Reservation #'.$id.' '.$request->confirme);
         return redirect()->route('reception_reservation');
     }
 
@@ -84,7 +85,8 @@ class receptionReservationController extends Controller
     public function destroy($id)
     {
        
-
-        
     }
+        
+
+
 }
